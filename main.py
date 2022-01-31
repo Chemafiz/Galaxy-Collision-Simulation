@@ -1,14 +1,16 @@
+import numpy as np
 import pygame, sys, math
 from pygame.locals import *
 import random
 from pygame import gfxdraw
 import galaxy
+from star import Star
 
 
 def main():
-    window_size = (1900, 1000)
-    #white = (255, 255, 255)
-    fps = 200
+    window_size = (800, 800)
+    white = (255, 255, 255)
+    fps = 30
     red = (255, 0, 0)
     black = (0, 0, 0)
 
@@ -16,14 +18,22 @@ def main():
     pygame.display.set_caption("Galaxies_collision")
     clock = pygame.time.Clock()
     window = pygame.display.set_mode(window_size)
-    wfiis = pygame.image.load("wfiis.png")
-    ja = pygame.image.load("ja.png")
-    oceny = pygame.image.load("oceny.png")
 
-    galaxies = [galaxy.Galaxy([0, -1], [600, 400], 1, red), galaxy.Galaxy([0, 1], [1000, 400], 1, red)]
+
+    galaxies = [galaxy.Galaxy([0.5, -0.5], [200, 400], 1, red), galaxy.Galaxy([-1, 0.1], [500, 400], 1, red)]
+    stars_list = []
+    for i in range(1500):
+        star = Star(white, 100)
+        star.set_parameters(galaxies[0])
+        stars_list.append(star)
+
+    for i in range(1500):
+        star = Star(white, 100)
+        star.set_parameters(galaxies[1])
+        stars_list.append(star)
+
     while True:
         window.fill(black)
-
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -31,11 +41,18 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     sys.exit()
-        window.blit(wfiis, (0, 0))
+
+        for star in stars_list:
+            star.motion(galaxies[0])
+            star.motion(galaxies[1])
+            if np.absolute(star.coordinates).sum() > 2000:
+                stars_list.remove(star)
+            star.print(window)
+
         galaxies[0].motion(galaxies[1])
         galaxies[1].motion(galaxies[0])
-        galaxies[0].print(window, ja)
-        galaxies[1].print(window, oceny)
+        galaxies[0].print(window)
+        galaxies[1].print(window)
         pygame.display.update()
         clock.tick(fps)
 

@@ -2,3 +2,5 @@
 venv/
 old_file.py
 __pycache__/
+images/
+testy.py
