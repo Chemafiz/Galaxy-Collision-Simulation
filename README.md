@@ -7,6 +7,8 @@ To achieve good FPS ,with at least 2000 stars, I used NumPy array.
 
 Here we can see screenshot of running program with two colliding galaxies and below  we can see two REAL galaxies colliding to each other.
 I think it is some kind of similarity between them :)
+
+
 ![image](https://user-images.githubusercontent.com/72997724/158909333-4c844209-ff37-4fba-ba8c-28bad93afb18.png)
 
 
