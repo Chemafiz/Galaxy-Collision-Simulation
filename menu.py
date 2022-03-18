@@ -1,6 +1,3 @@
-import pygame, sys, math
-from pygame.locals import *
-
 
 class Menu:
     def __init__(self, window_size, background_color, fps, title):
