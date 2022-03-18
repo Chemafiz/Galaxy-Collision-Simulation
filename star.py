@@ -27,17 +27,4 @@ class Star:
         self.y_velocity = galaxy_velocity[1] + (self.x_coordinate - galaxy_coordinates[0]) * ((galaxy_mass * self.constant / (
             ((self.x_coordinate - galaxy_coordinates[0]) ** 2 + (self.y_coordinate - galaxy_coordinates[1]) ** 2) ** 1.5)) ** 0.5)
 
-    # def print(self, window):
-    #     window.set_at((round(self.x_coordinate), round(self.y_coordinate)), self.color)
-    #
-    # def motion(self, galaxy_coordinates, galaxy_mass):
-    #     r_3 = ((self.x_coordinate - galaxy_coordinates[0]) ** 2 +
-    #         (self.y_coordinate - galaxy_coordinates[1]) ** 2) ** 1.5
-    #     self.x_acceleration = -self.constant * galaxy_mass * (self.x_coordinate - galaxy_coordinates[0]) / r_3
-    #     self.y_acceleration = -self.constant * galaxy_mass * (self.y_coordinate - galaxy_coordinates[1]) / r_3
-    #     self.x_velocity += self.x_acceleration
-    #     self.y_velocity += self.y_acceleration
-    #
-    # def change_coordinates(self):
-    #     self.x_coordinate += self.x_velocity
-    #     self.y_coordinate += self.y_velocity
+   
