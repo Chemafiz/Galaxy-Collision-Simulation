@@ -3,17 +3,16 @@ import numpy as np
 
 
 class Galaxy:
-    def __init__(self, velocity, coordinates, mass, color):
+    def __init__(self, velocity, coordinates, mass):
         self.velocity = velocity
         self.coordinates = coordinates
         self.acceleration = [0.0, 0.0]
-        self.color = color
         self.mass = mass
         self.constant = -200 * mass
 
     def print(self, window):
         radius = 1
-        pygame.draw.circle(window, self.color, (round(self.coordinates[0]), round(self.coordinates[1])), radius)
+        pygame.draw.circle(window, (255, 255, 255), (round(self.coordinates[0]), round(self.coordinates[1])), radius)
 
     def change_coordinates(self):
         self.coordinates[0] += self.velocity[0]
