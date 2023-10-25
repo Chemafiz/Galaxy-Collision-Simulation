@@ -1,4 +1,4 @@
-# galaxy-collision-simulation
+# Galaxy Collision Simulation
 This is numeric simulation of two colliding galaxies. Program is not very complicated, but it uses real gravity equations to calculate "stars" and "galaxies" position in real-time.
 Graphic was done with PyGame library.
 Because "while" loop (and generaly few others loops) is the main core of running program, it was hard to gain some good efficiency (Python doesn't like loops)
