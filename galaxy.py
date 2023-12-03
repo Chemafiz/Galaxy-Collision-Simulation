@@ -2,12 +2,13 @@ import numpy as np
 
 
 class Galaxy:
-    def __init__(self, velocity, coordinates, mass):
+    def __init__(self, velocity, coordinates, mass, radius):
         self.velocity = np.array(velocity, dtype=np.float32)
         self.coordinates = np.array(coordinates, dtype=np.float32)
         self.a = np.array([0.0, 0.0], dtype=np.float32)
         self.mass = mass
         self.G_constant = -200 * mass
+        self.radius = radius
 
 
     def update_coords(self, a):
