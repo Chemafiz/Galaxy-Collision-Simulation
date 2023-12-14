@@ -1,13 +1,11 @@
 import cv2
 import numpy as np
-import sys, math
-import random
+import math
 from galaxy import Galaxy
 from window import Window
 from numba import njit, prange
-import time
 from functools import partial
-from random import randint, uniform, random
+from random import randint
 
 
 
@@ -83,55 +81,6 @@ def make_spiral_galaxy(stars, galaxies, b, r, fuz_fac):
 
         stars[i::n, 3] = galaxy.velocity[1] + (galaxy.coordinates[0] - stars[i::n, 0]) * (
                 np.abs(galaxy.mass * G / ((((stars[i::n, :2] - galaxy.coordinates) ** 2).sum(axis=1))** 1.5)) ** 0.5)
-
-
-
-def make_spiral_galaxy2(stars, galaxies, R):
-    n = len(galaxies)
-    n_stars = stars.shape[0] // (n * 4 + 1)
-    thickness = 40
-
-
-    stars[:n_stars, 0] = galaxies[0].coordinates[0] - np.random.randint(1, R, n_stars)
-    stars[:n_stars, 1] = np.random.randint(1, thickness, n_stars) + galaxies[0].coordinates[1]
-
-    stars[n_stars:2*n_stars, 0] = galaxies[0].coordinates[0] + np.random.randint(1, R, n_stars)
-    stars[n_stars:2*n_stars, 1] = np.random.randint(-thickness, thickness, n_stars) + galaxies[0].coordinates[1]
-
-    stars[2 * n_stars:3 * n_stars, 0] = np.random.randint(-thickness, thickness, n_stars) + galaxies[0].coordinates[0]
-    stars[2 * n_stars:3 * n_stars, 1] = galaxies[0].coordinates[1] + np.random.randint(1, R, n_stars)
-
-    stars[3 * n_stars:4 * n_stars, 0] = np.random.randint(-thickness, thickness, n_stars) + galaxies[0].coordinates[0]
-    stars[3 * n_stars:4* n_stars, 1] = galaxies[0].coordinates[1] - np.random.randint(1, R, n_stars)
-
-############
-    stars[4 * n_stars:5 * n_stars, 0] = galaxies[1].coordinates[0] - np.random.randint(1, R, n_stars)
-    stars[4 * n_stars:5 * n_stars, 1] = np.random.randint(1, thickness, n_stars) + galaxies[1].coordinates[1]
-
-    stars[5 * n_stars:6 * n_stars, 0] = galaxies[1].coordinates[0] + np.random.randint(1, R, n_stars)
-    stars[5 * n_stars:6 * n_stars, 1] = np.random.randint(-thickness, thickness, n_stars) + galaxies[1].coordinates[1]
-
-    stars[7 * n_stars:8 * n_stars, 0] = np.random.randint(-thickness, thickness, n_stars) + galaxies[1].coordinates[0]
-    stars[7 * n_stars:8 * n_stars, 1] = galaxies[1].coordinates[1] + np.random.randint(1, R, n_stars)
-
-    stars[8 * n_stars:, 0] = np.random.randint(-thickness, thickness, n_stars + 1) + galaxies[1].coordinates[0]
-    stars[8 * n_stars:, 1] = galaxies[1].coordinates[1] - np.random.randint(1, R, n_stars + 1)
-
-
-
-    stars[:4* n_stars, 2] = galaxies[0].velocity[0] + (galaxies[0].coordinates[1] - stars[:4* n_stars, 1]) * (
-            np.abs(galaxies[0].mass * G / ((((stars[:4* n_stars, :2] - galaxies[0].coordinates) ** 2).sum(axis=1)) ** 1.5)) ** 0.5)
-
-    stars[:4* n_stars, 3] = galaxies[0].velocity[1] - (galaxies[0].coordinates[0] - stars[:4* n_stars, 0]) * (
-            np.abs(galaxies[0].mass * G / ((((stars[:4* n_stars, :2] - galaxies[0].coordinates) ** 2).sum(axis=1)) ** 1.5)) ** 0.5)
-
-    stars[4 * n_stars:, 2] = galaxies[1].velocity[0] + (galaxies[1].coordinates[1] - stars[4 * n_stars:, 1]) * (
-            np.abs(galaxies[1].mass * G / (
-                        (((stars[4 * n_stars:, :2] - galaxies[1].coordinates) ** 2).sum(axis=1)) ** 1.5)) ** 0.5)
-
-    stars[4 * n_stars:, 3] = galaxies[1].velocity[1] - (galaxies[1].coordinates[0] - stars[4 * n_stars:, 0]) * (
-            np.abs(galaxies[1].mass * G / (
-                        (((stars[4 * n_stars:, :2] - galaxies[1].coordinates) ** 2).sum(axis=1)) ** 1.5)) ** 0.5)
 
 
 
@@ -259,7 +208,7 @@ def main():
 
     make_circular_galaxy(stars_params, galaxies, galaxy_const_params[:, 1])
     # make_spiral_galaxy(stars_params, galaxies, 0.6, 200, 1.5)
-    # make_spiral_galaxy2(stars_params, galaxies, 200)
+
 
 
     callback_with_args = partial(move_window,
@@ -288,7 +237,6 @@ def main():
             break
         if key == ord("p"):
             pause = not pause
-
 
 
 if __name__ == "__main__":
