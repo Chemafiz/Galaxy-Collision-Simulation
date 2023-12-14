@@ -257,9 +257,9 @@ def main():
         galaxy_const_params[i, :] = galaxy.mass, galaxy.radius
 
 
-    # make_circular_galaxy(stars_params, galaxies, galaxy_const_params[:, 1])
+    make_circular_galaxy(stars_params, galaxies, galaxy_const_params[:, 1])
     # make_spiral_galaxy(stars_params, galaxies, 0.6, 200, 1.5)
-    make_spiral_galaxy2(stars_params, galaxies, 200)
+    # make_spiral_galaxy2(stars_params, galaxies, 200)
 
 
     callback_with_args = partial(move_window,
